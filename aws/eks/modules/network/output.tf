@@ -1,3 +1,3 @@
 output "vpc_id" {
-  value = aws_vpc.golo-port
+  value = aws_vpc.golo-portfolio
 }
