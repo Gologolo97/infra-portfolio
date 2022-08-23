@@ -1,3 +1,8 @@
 aws/ecr/.terraform
 aws/ecr/.terraform.lock.hcl
 aws/ecr/terraform.tfstate
+aws/eks/terraform.tfstate.backup
+aws/eks/.terraform
+aws/eks/.terraform.lock.hcl
+aws/eks/terraform.tfstate
+
