@@ -21,3 +21,36 @@ module "my_network" {
   availabilty_zone = var.availability_zone
 
 }
+
+module "my_compute" {
+  source = "./modules/compute"
+
+  depends_on = [
+    module.my_network
+  ]
+
+  user_name      = var.user_name
+  subnet_private = module.my_network.subnet_private
+  subnet_public  = module.my_network.subnet_public
+}
+
+//provider "helm" {
+//  kubernetes {
+//    config_path = "~/.kube/config"
+//  }
+//}
+//
+//resource "helm_release" "argocd" {
+//  name             = "argocd"
+//  create_namespace = true
+//  namespace        = "argocd"
+//
+//  repository = "https://argoproj.github.io/argo-helm"
+//  chart      = "argo-cd"
+//
+//  set {
+//    name  = "service.type"
+//    value = "ClusterIP"
+//  }
+//}
+//
