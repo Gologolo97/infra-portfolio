@@ -1,0 +1,22 @@
+FROM jenkins/jenkins:2.356-jdk8
+
+# Change user to be root
+USER root
+
+# Install docker client
+RUN apt-get update -y && apt-get install docker.io -y
+# Install curl
+RUN apt update -y && apt upgrade -y && apt install curl -y
+# Install docker-compose 
+RUN curl -L \  
+  "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" \  
+  -o /usr/local/bin/docker-compose \  
+  && chmod +x /usr/local/bin/docker-compose
+  
+RUN usermod -aG docker jenkins
+
+ARG  HOST_DOCKER_GID
+RUN  groupmod -g $HOST_DOCKER_GID docker
+# Return to jenkins user
+USER jenkins
+	

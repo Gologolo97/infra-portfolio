@@ -1,0 +1,25 @@
+version: '3'
+services:
+  jenkins:
+    build: 
+      context: ./
+      dockerfile: Dockerfile.jenkins
+      args:
+        HOST_DOCKER_GID: 1003
+    ports:
+      - 8080:8080
+      - 5050:5000
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+        
+volumes:
+  jenkins_home:
+    external: true
+networks:
+  default:
+    external:
+      name: portfolio
+
+  
+   

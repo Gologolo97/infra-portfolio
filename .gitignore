@@ -1,0 +1,3 @@
+aws/ecr/.terraform
+aws/ecr/.terraform.lock.hcl
+aws/ecr/terraform.tfstate
