@@ -26,7 +26,7 @@ resource "aws_eks_cluster" "eks" {
   name     = var.user_name
   role_arn = aws_iam_role.eks_cluster.arn
 
-  version = "1.23"
+  version = "1.22"
 
   vpc_config {
     subnet_ids = [
@@ -103,7 +103,7 @@ resource "aws_eks_node_group" "private_nodes" {
     role = "nodes-general"
   }
 
-  version = "1.23"
+  version = "1.22"
 
   depends_on = [
     aws_iam_role_policy_attachment.amazon_EKS_Worker_node_policy,

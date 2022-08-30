@@ -25,7 +25,7 @@ resource "aws_subnet" "golo-public" {
 
   tags = {
     Name                        = "${var.user_name}-${count.index + 1}-public"
-    "kubernetes.io/cluster/eks" = "owned"
+    "kubernetes.io/cluster/golo-portfolio" = "owned"
     "kubernetes.io/role/elb"    = "1"
   }
 }
@@ -37,9 +37,9 @@ resource "aws_subnet" "golo-private" {
   availability_zone = var.availabilty_zone[count.index]
 
   tags = {
-    Name                              = "${var.user_name}-${count.index + 1}-private"
-    "kubernetes.io/cluster/eks"       = "owned"
-    "kubernetes.io/role/internal-elb" = "1"
+    Name                                   = "${var.user_name}-${count.index + 1}-private"
+    "kubernetes.io/cluster/golo-portfolio" = "owned"
+    "kubernetes.io/role/internal-elb"      = "1"
   }
 }
 

@@ -34,23 +34,28 @@ module "my_compute" {
   subnet_public  = module.my_network.subnet_public
 }
 
-//provider "helm" {
-//  kubernetes {
-//    config_path = "~/.kube/config"
-//  }
-//}
-//
-//resource "helm_release" "argocd" {
-//  name             = "argocd"
-//  create_namespace = true
-//  namespace        = "argocd"
-//
-//  repository = "https://argoproj.github.io/argo-helm"
-//  chart      = "argo-cd"
-//
-//  set {
-//    name  = "service.type"
-//    value = "ClusterIP"
-//  }
-//}
-//
+provider "helm" {
+  kubernetes {
+
+    config_path = "~/.kube/config"
+  }
+}
+
+resource "helm_release" "argocd" {
+  name             = "argocd"
+  create_namespace = true
+  namespace        = "argocd"
+
+  repository = "https://argoproj.github.io/argo-helm"
+  chart      = "argo-cd"
+
+  set {
+    name  = "service.type"
+    value = "ClusterIP"
+  }
+
+    depends_on = [
+    module.my_compute
+  ]
+
+}
