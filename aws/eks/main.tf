@@ -32,6 +32,11 @@ module "my_compute" {
   user_name      = var.user_name
   subnet_private = module.my_network.subnet_private
   subnet_public  = module.my_network.subnet_public
+  instance_types = var.instance_types
+  version        = var.version
+  desired_size =  var.desired_size
+  max_size = var.max_size
+  min_size = var.min_size
 }
 
 provider "helm" {
@@ -54,7 +59,7 @@ resource "helm_release" "argocd" {
     value = "ClusterIP"
   }
 
-    depends_on = [
+  depends_on = [
     module.my_compute
   ]
 

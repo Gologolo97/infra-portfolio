@@ -26,7 +26,7 @@ resource "aws_eks_cluster" "eks" {
   name     = var.user_name
   role_arn = aws_iam_role.eks_cluster.arn
 
-  version = "1.22"
+  version = var.version
 
   vpc_config {
     subnet_ids = [
@@ -87,12 +87,12 @@ resource "aws_eks_node_group" "private_nodes" {
   ]
 
   capacity_type  = "ON_DEMAND"
-  instance_types = ["t2.large"]
+  instance_types = [var.instance_types]
 
   scaling_config {
-    desired_size = 3
-    max_size     = 3
-    min_size     = 0
+    desired_size = var.desired_size
+    max_size     = var.max_size
+    min_size     = var.min_size
   }
 
   update_config {
@@ -103,7 +103,7 @@ resource "aws_eks_node_group" "private_nodes" {
     role = "nodes-general"
   }
 
-  version = "1.22"
+  version = var.version
 
   depends_on = [
     aws_iam_role_policy_attachment.amazon_EKS_Worker_node_policy,
